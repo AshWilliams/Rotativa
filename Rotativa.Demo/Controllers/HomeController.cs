@@ -35,7 +35,7 @@ namespace Rotativa.Demo.Controllers
 
         public ActionResult TestImagePng()
         {
-            return new ActionAsImage("Index", new { name = "Giorgio" }) { FileName = "Test.png", Format = ImageFormat.png };
+            return new ActionAsImage("Grafico", new { name = "Giorgio" }) { FileName = "Test.png", Format = ImageFormat.png };
         }
 
         public ActionResult TestUrl()
@@ -45,7 +45,7 @@ namespace Rotativa.Demo.Controllers
             // where you create correct URL according to passed conditions, prepare some complex model, etc.
 
             var urlHelper = new UrlHelper(Request.RequestContext);
-            string url = urlHelper.Action("Index", new { name = "Giorgio II." });
+            string url = urlHelper.Action("Grafico", new { name = "Giorgio II." });
 
             return new UrlAsPdf(url) { FileName = "TestUrl.pdf" };
         }
@@ -132,8 +132,13 @@ namespace Rotativa.Demo.Controllers
 
         public ActionResult TestViewWithModel(string id)
         {
-            var model = new TestViewModel { DocTitle = id, DocContent = "This is a test" };
-            return new ViewAsPdf(model);
+            //var model = new TestViewModel { DocTitle = id, DocContent = "This is a test" };
+            return new ViewAsPdf();
+        }
+
+        public ActionResult Grafico()
+        {
+            return View("TestViewWithModel");
         }
 
         public ActionResult TestImageViewWithModel(string id)

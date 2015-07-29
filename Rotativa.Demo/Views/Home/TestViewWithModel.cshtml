@@ -6,6 +6,150 @@
 
 <h2>TestViewWithModel</h2>
 
+@*<script src="../../Scripts/amcharts.js"></script>
+<script src="http://www.amcharts.com/lib/3/serial.js"></script>
+<script src="../../Scripts/light.js"></script>
+<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
+<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/StackBlur.js"></script>
+<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> *@
+
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript">
+    var chart,theImage = "";
+    $(function () {
+       // chart = AmCharts.makeChart("", {
+       //     "type": "serial",
+       //     "theme": "light",
+       //     "dataProvider": [{
+       //         "country": "USA",
+       //         "visits": 2025
+       //     }, {
+       //         "country": "China",
+       //         "visits": 1882
+       //     }, {
+       //         "country": "Japan",
+       //         "visits": 1809
+       //     }],
+       //     "valueAxes": [{
+       //         "gridColor": "#FFFFFF",
+       //         "gridAlpha": 0.2,
+       //         "dashLength": 0
+       //     }],
+       //     "gridAboveGraphs": true,
+       //     "startDuration": 1,
+       //     "graphs": [{
+       //         "balloonText": "[[category]]: <b>[[value]]</b>",
+       //         "fillAlphas": 0.8,
+       //         "lineAlpha": 0.2,
+       //         "type": "column",
+       //         "valueField": "visits"
+       //     }],
+       //     "chartCursor": {
+       //         "categoryBalloonEnabled": false,
+       //         "cursorAlpha": 0,
+       //         "zoomable": false
+       //     },
+       //     "categoryField": "country",
+       //     "categoryAxis": {
+       //         "gridPosition": "start",
+       //         "gridAlpha": 0,
+       //         "tickPosition": "start",
+       //         "tickLength": 20
+       //     },
+       //     "export": {
+       //         "enabled": true
+       //     }
+
+       // });
+ 
+
+       // chart.write("testChart");
+       // $('.amcharts-chart-div').find("g").attr("visibility", "visible");
+       // $('.amcharts-chart-div').find("g").attr("opacity", "1");
+       // var $container = $('.amcharts-chart-div'),
+       //// Canvg requires trimmed content
+       //content = $container.html().trim(),
+       //canvas = document.getElementById('svg-canvas');
+       
+       // console.log(content);
+       // // Draw svg on canvas
+       // canvg(canvas, content);
+
+        // Change img be SVG representation
+        //theImage = canvas.toDataURL('image/png').replace("image/png", "image/jpeg");
+        //theImage = canvas.toDataURL("image/png");
+        //var test = "data:image/jpeg;base64,";
+        //test += "R0lGODlh+gDuAMQAAA8PD8TX6u8pKXKfz/JVVXPSFvV5AHNzc/mvr42y2K7jdVw1ZqWmp////3K7LlpaWn6BgszMzPzpT0FDQ/eVNtNtCfvRqGFFau3t7f/MzM4qK729vdnKSjMzM97e3vzxkyH5BAEHAA0ALAAAAAD6AO4AAAX/YCOOZElCXceYbOu+cCzPdG3feK7vLarywKBwSCwajyPfCslsOp/QqDJKrVqvSMzI4+mlltiweEwmRTpaxuQBYU3L8Lj8iHmgMRNPvVt6z/+AgTMQahgeD1oHYElfgo6PjxsQdYYPIoQmfpCbnGMPax2IE4kbmY2dqEEYq6ytrq+wrmJcEROlDxsRiKY/qb45AQPCw8TFxsfECWWTDREHuG6nv9M0wcjX2MmdmtTdLtbZ4cfKnNze5yTg4uvC5Jvm6Ojq7OLukPDx3vP02faP+Pmo7eN3zZ8jgAF/DSQ4bpu0hOcWMixmUBBCiKgkThxWMdBFjJw0bhzQEdBHkJBE/24s+eckSkcqJ7Kc4/JloJgMZ8qpafMPToI64/DsKecnv6BwhhKFY5Qe0mUPl4Ycie0pGaVSxzRlZ3UM1qxhtq7rKuYr2Cti642RFEHEBgZwo/U6m5JqQTEMHqhpyyYur0V0BaUNR3ZIhC6KGkyIoEUu4MCABvcbUwfNGTtt/kJ+JLkqGQwHJnXBw+dE1M1zOt8Nw6DLhgceSu3RLCIDgdu4c+vezVt3BtQ3VCMrLCSvcQ8TGECwRLsBAgHQo0ufTr369N/AawhvKEZSqWZwG/eR9ty6+fPXs2u3O9zh3PLo41vHrl7GdmPEr/iBL79/dPr1wXAfRe6BwZ9//QEY4P837HH3DnkIRqjggiwMqE05EEbo34QUlmAhRwWOcKCG53HY4QgfthOiCCOSON+JDDZIIIbvuSifiTCmSNKKztkYH44n6pifFfv5iB6QHQrJY4tG/gdjC0rSaGCT5iFJYZQP1khldVYuiOU9GW6Z3pMmfPlPmGI6SaaHMs6Y5ZRpStdlgGYehGacc9ZXp0V3ppmnent61KeYf2YXKBSgsSFCXgeUZpqWcUJXKHCHPqHcIRscEsFrjokYqZprotjmhVisgikDBzSAh3iMQBrppKhV+kRlHiinKmzNMUklfbH06qssCckKhXFtkJbrp5KKYAEFzDbr7LPQRvssqxGNCmL/GBCUkpcuDSDXKYvICoCdBQaUa+656Kar7rkUUKuPtSqGUcsnbT0DzbHIjrvuvvyi225AwjZhiHhceOEqnsr2q/C+/+YTcFKDbqnvwhSz6243D0N1sJ8JV+xxw/FkfFXEu3bsMcUgywPvjlJ6mq/JJyuccrXwDllFkS83QG7MC8/8bs1Lhjsxz/36jPHKNlOB86dDE83wxQIhHXTOOzv9NMBStwwu1Vbza3TUQGvdI9ddr/v1NCJ7RXKTTZdtMdZhv+ky0zC7be7ZCmUt99Z062x3unj7knZZaxvZ9t+BpzI4toX7eLjdiWekN5gbE1o34lCjPfmZlUt8OeSZ5x03/+Vw9l313+VG3sniQ2DAmAiGFIyv6ai/7fDmVdRygC0NPOB7qrO/+rnbqk81OpEr5KWYHgaXLrzftaceuuC46weBB6HcO17nJUMfffGbsD5EXqu0tsEowSPsfe3g13W8FeTDLsIDbW3vvPqno97+DhEo4P//AAygAAcIQD6IDwh70UMtMHA+dy3tefnDHBUUUIAKWvCCGMygBi+oABEckAfL8V0b8kK/b42NdtEzwP50QMENuvCFHPRg9QTFPbYNr2wrzEELYchDDXawAR9UWuNs9DjiTY8IO+yhEiv4wyBKYYguKiIOjziEJC6xh02coUmgSCIpdi2HOLDiFWGYxf/38amGhrvhF6koBDGO0YVltFbSnohGx6nRamC8gRvf6EMZmpGG9+PY+vTHxiDskY8YjOOo5giFB+IvhSosJBAOiUgLKrJNjHyCIwUZQdBNsJJk9KMcp4bC70mSB5QE5SVllEknbNJyg5RgFFJZyVU2qJVNeKXnYunJWYLyhbZkDy6ZoMvuddKIn/zlBoNpl2EioZg25CUyfanMPgJRiy3hooa8iMdT7oCWiGQmVZx5BGimUZpTTGY1EynKRZISgpDMow3AyUdxjoScRjCnHdG5RnWu05LtxOQ7H5lCedaAnm+050rWgoluEeJi+iTiHZ1mUBogdIwKlQlecKEovUD/AHj2mxs8C+pNFv6Tndf847Bcw1FVoS+kfBupKf150ozm5DN6sdVsYHpCmbKvpDo8aQxTOkoxgGaExcIVT3UVzWOmk5pCLYBNgWJURTXDEqtKHyfjCdQwRpWJAWWlGA7QAUKsIDkQyMxShTZRolV0Bhe94lSPghe4MEA24TEhU8/p1H5CVahzdcpAt0pSmv4zsFwZLCz72k3DrhOxY1HsLhlL0a7q8atSDestJWtMrjq2mpBVi9j2uk/KutWy88RsaAnD2aZ69q811awwW8vX10Ihrktc7WRGy1Z+Nha2h5VtM2lbWts+AbdK1K1neEu2mQL3scIdJ3El6tvKflaZ/8pdzd56SlDn3la10b3ndKPYVp69VQbIxWJ4F8rcUv70ur/Mbnva61NCwleV69Uofbv73ueCNr833S9hvXtc8BLVnQJerHGdkF4eytdBpBMpf+3rX+wCmKpGbdStfPeYBkSUvNU97X1reWG6huEQHWiLLlbRPAkPuL/f/eqD8SOGTZUwLw3VqoILW+H4lliwnmgLqnCs196a1ryoPaiBnbiDErK4FkVuLowLLOMfJzbIHl4Bp3Q82QU3ocGhPLBAx6Bh3S0myu6lcIyjOmM3hUE8A2txTCcsyzUD1sqRTXCXeWzn2IpZrHruLJ+pzGY8i3a7pKXukWN23hiAGZiGZv9toF07aAYvGZs00aaEysvoJFv00irNZh0V7WUmPBqOkd4too1caiScepmpXu6qpaxmQt/5z5uddG0r/WVQF3XWaa6zrf3MZE1qGkHctG6P8Yvr2eq6uLw2ta8RDOz6CtvSVW72cJ9N6mi7etpjrjade9nn4GpbutwG8aJP1mgYvNqaxXblsTfEaXZ7Gq7gBrS4X1xrbBf63OIdQ2nijGZrk3vY5o73Dc7QFjz4zlGtCuSOCezvWyu8BudLcZYbYCsuC9q5H5CAyEdO8pKb/OQk/8AI3p3BNpPqCqsoYQm55XFKgxzlOM95yVUuApaj9OI2kHkXoFzzXd9c50hHOc//G+DzoQK9BjIvBc3XSmtZhjzpWE/5yvOdazHcuFE5fpTE93z0rGd96U0HKMDZWxY+LIcZRYd22c2edLRz3dn7nnh/r073um8920/P57wTVO+PNYbvfde53QGP6Z0M/kaFr1jDEJ94nC/+34Evwoe7GHmUHb7ySL+8xRsvlMf/qPM9+zzocy56YpMeYqNW92spv/qd/x3zr9fY2D++99pb/vajD3WmY8/5ECNZBLT3vchbn/Dcj4z420S9zFSvfNv3/O7bzjvZe1996zMd++jWPu8pnHzlMx+6a9ev+G3O/e6P/Pz/TX+A12/09rtfAvC3sPwxTH+529/9+edj+2di//3XbXMHgMDnesLneNC3acbXach3f++XgM23gKXXgMgmfUVDffcXgMyWeUSwedH3gPYWgRKIfxSIfiA4BCLogOtmeCYogR5IYgMIZGWAAXYFcZdgekeigV7DgQh4fYxngcOSUzroYTxYIj54NQ1Qfr43g+EUa9p1Fa0BNS2YgSQIg014gigohLhHhE/wCROQBwU3btPkhLUHhfUkhfNVBm6nVmLnYnpHflyohgnFhg6yAQuwh3zYh374h4Doh0dYAgyQBnAYcXK4fXR4gnaIUXhIY24RiJI4iX84iCRwAIpQQnFngP/XfY0oV4/oJnpIiaQoiZY4AjjIAPWzibLHY/9ouHqfmFuhSCqjWIq22IenOAhJWCVLaDZA6IkpGH9YUou3eIu5KANXSG9ZKHm/WH2xmFyzeC0NQIzFWIrHGAPJSHjL6Hkx2IHBqH/DWI3FeI0wkI2Qt42p141B+H1D+GvUKI6TSI4vYI6nh47Tp47A6IXB547waIvy6AL02IP2uIH46IzfKIDh2I+k+I9yxl38ZnV1eJAfqDfvqJCVKAOxA1G7+CID+YMFaX4SSYMJaZGmiI0dAAAA0AHfEYdz9pC99Iqg94zqVYNXNo0kGY8wwAAAkFMnCXEBqYQdyYQwWXky6WDRGC82eZOBeIoYAAAvFQE7SXXB9pIRqY8KyI//SgmIp7gBALAIEwAArOID18MFCKABZnmWaJmWarmWaZkpHoAAFRCXcjmXdFmXdjmXFHAYHqAAHNCXfvmXgBmYgvmXFsAFe+kAiJmYirmYjNmYiqkAXLABKzMAhskAF3CZmJmZmrmZnKmZbskF1AIBALCSDXAAALCKSNgBY7iaKdCarvmasBmbsLmaEyCbtnmbs0mburmbvNmbvvmbwBmcwjmcxFmcxkmbICUCpukookmaPoCb0Bmd0jmd1Fmd1nmd2Jmd2rmdsJmcvQOWJKCTiwABx1me5nme6Jme6rme7NmetHmIDwCeSTCaJfAr9nmf+Jmf+rmf/Nmf/vmfABqg/71SAst5AqcZKgjKAzpJmvF5bwkKI1AJUhiQAg9aoTjwlfUjmoc4A4dARXAXAx5gLx0GBCF0AKQZgqNhonfFAm/hYUpVn6nyOi9gLwcgZCeaA6/xADX6BFC5k1/5UjZAnovAKiyWVaryAnhgPskBO1rAYqgIZ/XJAnqxKWSoKkRKAtQCZ+5CP3XQBrJzpCIAminGCiZwC6jJAioZAWqwcSbgpDJwPoehBnzQGG4KpvKDijOgC6r5oTUwoQvkYc9wAK7jO1w6CrpgVSyAKiNwPiGqFzkqqKjiO0L2O5XABtSiF5WgB/ayAaDxDG1wqLDhDBzGcb9TAhyVGXBxPaThAf/ZohxlFalxwaqgcRmh0wEKNAqE0KKgQap6MQPawxgb8AwREEIrgImKkiiNkigv2gScAg2KklYbgAbIQRqY2qsskBhhuhgqiQEQwBi4QD6oMq1ncAiFiK0jYAe1aQnDioOIMKZ5cFegcVd5AGVjeWYjMIYHmmW5qgKSoByrgom18qnt2ju5qJq12QZm5aWj4K5nygITqgVq2hpyKqtn0AAqEK8fxa4LtAE3egR28LGlKXW4ADy2qq2+MwEbeglgUAsVe1V2kKpXpaiKcRmfAJ+FSK4uOoYTOj9c8AxlxSk7m6Mad6/digZZ5gxp9VFvMQmjkBi2smIdQLAwYKuusxj/CdstJmsHHVuftjqNQtpxJBS1uKIcnyCGlaFhToA9prIYTpstzIEGi0GGEdCwIvCngOotFssXMKsL3OKnM3em95K0bdBAUds7urAC0JoqE4o9emCv89MWy5FlDocco+CvTZs8qfIaO7usaNoYHgUXmZsHo8BA1/hRI6AItkI+2LM8WZYYseEBkMscuaRWoWEHuxMb2VOI74qyVZqoE2AvqzAB84OJKvC0lmAvtqoG5Am4a/AJsYGyn7Czhvt2vxusqhK1KEtWDFo/aFWslqCjHMe08dotHQC8UfsMtUqoiEAIyGEvpamjuxADdbAGaxCwzQC9Uaua6GtmrQG9I0oE7W66CorwOq8xt2EapjLqArEho3M6t63ApG45urCrg7HDPM3AGF0wp6vgwGTaLd1yGHU6cGRapE2qBaPRGLDLYqORi4bJPCrMGI3hwDUAu6/jpCncBYsho65TP6SLLSvpDFVQB8/wvxZ6A5wrBwHsoDPgOgxZxC/QxE4cxVLcE4YwxVYMA1N3xVpsBjnVpHAxdG8RG3fFB1u7xfUBlagiqJgop+RJCK+qrrJrxh1Cc7ZQvN1LqrfCqkQsx6hBxwxQvKqICTKbVvHLxxQyrnlBrnUwrJhbt+VryCfCqjqawUPMcSoGBrwDyVPMrnEQAgA7";
+        //$('#imagen').attr('src', test);
+        
+        //$("p").html(theImage);
+        //var can = document.getElementById('svg-canvas');
+        //var ctx = can.getContext('2d');
+
+        //ctx.fillRect(50, 50, 50, 50);
+
+        //var img = new Image();
+        //img.src = can.toDataURL();
+        //document.body.appendChild(img);
+        $('#container').highcharts({
+
+            chart: {
+                type: 'column'
+            },
+
+            title: {
+                text: 'Total fruit consumtion, grouped by gender'
+            },
+
+            xAxis: {
+                categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            },
+
+            yAxis: {
+                allowDecimals: false,
+                min: 0,
+                title: {
+                    text: 'Number of fruits'
+                }
+            },
+
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '<br/>' +
+                        'Total: ' + this.point.stackTotal;
+                }
+            },
+
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
+
+            series: [{
+                name: 'John',
+                data: [5, 3, 4, 7, 2],
+                stack: 'male'
+            }, {
+                name: 'Joe',
+                data: [3, 4, 4, 2, 5],
+                stack: 'male'
+            }, {
+                name: 'Jane',
+                data: [2, 5, 6, 2, 1],
+                stack: 'female'
+            }, {
+                name: 'Janet',
+                data: [3, 0, 4, 4, 3],
+                stack: 'female'
+            }]
+        });
+
+
+    });
+</script>
 <fieldset>
     <legend>TestViewModel</legend>
 
@@ -18,7 +162,15 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.DocContent)
     </div>
+    
 </fieldset>
+
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    
 </p>
+<div id="container" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+
+@*<div id="testChart" style="height:300px;position:relative;width:40%;"></div>
+<img style="width:500px;height:300px;" src='' id="imagen" />
+<canvas id="svg-canvas" width="200" height="200"></canvas>*@
+
